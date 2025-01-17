@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
         required : true,
     },
     gender : {
-        type : String,
+        type : {String,
+              require},
         enum : ["male","female"],
         required : true,
     },
