@@ -7,6 +7,7 @@ exports.sendMessage= async (req,res)=>{
        const senderID= req.ID;
        const receiverID=req.params.id;
        const {message}=req.body;
+       
        let Participants=await Conversation.findOne({
         participants:{$all:[senderID,receiverID]}
        })
@@ -24,7 +25,7 @@ exports.sendMessage= async (req,res)=>{
        if(newmessage){
         Participants.messages.push(newmessage._id)
        }
-       Participants.save();
+       await Participants.save();
        return res.status(201).json({
         message:"message send successfully"
        })
@@ -33,5 +34,21 @@ exports.sendMessage= async (req,res)=>{
     }
     catch(err){
         console.log(err);
+    }
+}
+
+exports.getMessage = async (req,res) => {
+    try {
+        const receiverID = req.params.id;
+        const senderID = req.ID;
+        console.log(receiverID,senderID);
+        const conversations = await Conversation.findOne({
+            participants:{$all : [senderID, receiverID]}
+        }).populate("messages"); 
+        
+        return res.status(200).json(conversations?.messages);
+
+    } catch (error) {
+        console.log(error);
     }
 }
