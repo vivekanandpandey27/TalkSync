@@ -1,8 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate  } from 'react-router-dom'
 import { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 export const LoginPage = () => {
-  const [FormData,SetformData] = useState({UserName : "",Password : ""});
+  const navigate=useNavigate();
+  const [FormData,SetformData] = useState({userName : "",password : ""});
     function changeHandler(event)
     {
         const {name,type,value,isChecked} = event.target;
@@ -14,12 +17,29 @@ export const LoginPage = () => {
           }
         })
     }  
-    function onSubmitHandler(event)
+   async function onSubmitHandler(event)
     {
-      console.log("Login Details : ",FormData);
-      event.preventDefault();
       
-      SetformData({UserName : "",Password : ""});
+      event.preventDefault();
+      try{
+        const res= await axios.post("http://localhost:8080/api/v1/user/login",FormData,{
+          headers:{
+            'Content-Type':'application/json'
+          },
+          withCredentials:true
+        });
+        
+          navigate('/');
+          toast.success(res.data.message);
+          SetformData({UserName : "",Password : ""});
+        
+      }
+      catch(error){
+        toast.error(error.response.data.message);
+        console.log(error);
+      }
+      
+      
     }
 
   return (
@@ -28,21 +48,21 @@ export const LoginPage = () => {
 
         <form className='flex flex-col relative min-w-[23rem] bg-white/20 rounded-lg backdrop-blur-sm border border-white/5 p-8 shadow-sm shadow-orange-600'>
 
-            <label htmlFor= "UserName" className='block  text-white text-sm mt-3 font-bold'>
+            <label htmlFor= "userName" className='block  text-white text-sm mt-3 font-bold'>
                 UserName
             </label>
-            <input id = "UserName" name = "UserName" type ="text"
+            <input id = "userName" name = "userName" type ="text"
             onChange={changeHandler}
-            value = {FormData.UserName}
+            value = {FormData.userName}
             placeholder="Enter UserName" className='w-full h-12 bg-white/10 rounded-md mt-2 px-4 text-white text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-600'/>
 
 
-            <label htmlFor= "Password" className='block text-white text-sm mt-3 font-bold'>
+            <label htmlFor= "password" className='block text-white text-sm mt-3 font-bold'>
                 Password
             </label>
-            <input id = "Password" name = "Password" type = "password"
+            <input id = "password" name = "password" type = "password"
             onChange={changeHandler}
-            value = {FormData.Password}
+            value = {FormData.password}
             placeholder="Enter Password" className='w-full h-12 bg-white/10 rounded-md mt-2 px-4 text-white text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-600'/>
 
             <Link to= "/signup" className='mt-4 text-center underline text-white/40'> Don't Have a Account ?</Link>
