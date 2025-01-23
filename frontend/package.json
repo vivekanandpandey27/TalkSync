@@ -1,5 +1,5 @@
 {
-  "name": "demoapp",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -43,7 +43,6 @@
     ]
   },
   "devDependencies": {
-    "daisyui": "^4.12.23",
-    "tailwindcss": "^3.4.17"
+    "daisyui": "^4.12.23"
   }
 }
