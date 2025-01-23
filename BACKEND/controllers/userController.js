@@ -41,6 +41,7 @@ exports.register = async (req, res) => {
     // Hashing  the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    console.log("Line 44")
     // Saving user in DB
     await User.create({
       fullName,
@@ -104,8 +105,10 @@ exports.login = async (req, res) => {
       .status(200)
       .cookie("token", token, { maxAge: 3600000, httpOnly: true })
       .json({
-        success: true,
-        message: "Login successful! Cookies sent.",
+         userName : user.userName,
+         id : user._id,
+         profilePhoto : user.profilePhoto,
+         gender : user.gender,
       });
   } catch (err) {
     console.error(err);
