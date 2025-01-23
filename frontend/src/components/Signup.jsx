@@ -1,9 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 export const Signup = () => {
 
- const [FormData,SetformData] = useState({fullName : "",UserName : "",Password : "",ConfirmPassword : "",Gender:"" });
+ const [FormData,SetformData] = useState({fullName : "",userName : "",password : "",confirmPassword : "",gender:"Male" });
+ const navigate=useNavigate();
  function changeHandler(event)
   {
       const {name,type,value,isChecked} = event.target;
@@ -16,12 +19,33 @@ export const Signup = () => {
       })
   }
 
-  function onSubmitHandler(event)
+   async function onSubmitHandler(event)
   {
-    console.log("Signup Details : ",FormData);
-    event.preventDefault();
     
-    SetformData({fullName : "",UserName : "",Password : "",ConfirmPassword : "",Gender:"" });
+    event.preventDefault();
+    const normalizedGender = FormData.gender.toLowerCase();
+    const formDataToSend = {
+      ...FormData,
+      gender: normalizedGender,
+    };
+     try{
+    const res= await axios.post("http://localhost:8080/api/v1/user/register",formDataToSend,{
+      headers:{
+        'Content-Type':'application/json'
+      },
+      withCredentials:true
+    });
+    if(res.data.success){
+      navigate('/login');
+      toast.success(res.data.message);
+      SetformData({fullName : "",userName : "",password : "",confirmPassword : "",gender:"" });
+    }
+  }
+  catch(error){
+    toast.error(error.response.data.message);
+    console.log(error);
+  }
+   
   }
   
   
@@ -39,30 +63,30 @@ export const Signup = () => {
             value = {FormData.fullName}
             placeholder="Enter Full Name" className='w-full h-12 bg-white/10 rounded-md mt-2 px-4 text-white text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-600'/>
 
-            <label htmlFor= "UserName" className='block  text-white text-sm mt-3 font-bold'>
+            <label htmlFor= "userName" className='block  text-white text-sm mt-3 font-bold'>
                 UserName
             </label>
-            <input id = "UserName" name = "UserName" type ="text" 
+            <input id = "userName" name = "userName" type ="text" 
              onChange={changeHandler}
-             value = {FormData.UserName}
+             value = {FormData.userName}
             placeholder="Enter UserName" className='w-full h-12 bg-white/10 rounded-md mt-2 px-4 text-white text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-600'/>
 
 
-            <label htmlFor= "Password" className='block text-white text-sm mt-3 font-bold'>
+            <label htmlFor= "password" className='block text-white text-sm mt-3 font-bold'>
                 Password
             </label>
-            <input id = "Password" name = "Password" 
+            <input id = "password" name = "password" 
              onChange={changeHandler}
-             value = {FormData.Password}
+             value = {FormData.password}
             type = "password" placeholder="Enter Password" className='w-full h-12 bg-white/10 rounded-md mt-2 px-4 text-white text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-600'/>
 
 
-            <label htmlFor= "ConfirmPassword" className='block text-white text-sm mt-3 font-bold'>
+            <label htmlFor= "confirmPassword" className='block text-white text-sm mt-3 font-bold'>
                 Confirm Password 
             </label>
-            <input id = "ConfirmPassword" name = "ConfirmPassword" type = "password" 
+            <input id = "confirmPassword" name = "confirmPassword" type = "password" 
              onChange={changeHandler}
-             value = {FormData.ConfirmPassword}
+             value = {FormData.confirmPassword}
             placeholder="Enter ConfirmPassword" className='w-full h-12 bg-white/10 rounded-md mt-2 px-4 text-white text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-600'/>
         
             <label htmlFor="gender" className="block text-white text-sm  mt-3 font-bold" >
@@ -74,7 +98,7 @@ export const Signup = () => {
               id = "gender"
               className="bg-white/10 mt-2 rounded-md p-1"
               onChange={changeHandler}
-              value = {FormData.Gender}
+              value = {FormData.gender}
             >
           
             <option value = "Male" className="bg-white/10">Male</option>
