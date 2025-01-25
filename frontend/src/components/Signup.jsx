@@ -29,7 +29,7 @@ export const Signup = () => {
       gender: normalizedGender,
     };
      try{
-    const res= await axios.post("http://localhost:8080/api/v1/user/register",formDataToSend,{
+      const res= await axios.post("http://localhost:8080/api/v1/user/register",formDataToSend,{
       headers:{
         'Content-Type':'application/json'
       },
