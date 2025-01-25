@@ -1,57 +1,23 @@
 import React from 'react'
 import Message from './Message'
-
+import useGetMessages from '../Hooks/useGetMessages'
+import { useSelector } from 'react-redux'
 const Messages = () => {
+  useGetMessages();
+  const { messages } = useSelector(store => store.message);
   return (
-    <div className='overflow-y-auto mb-2'>
-        <Message/>
-        <Message/>
+      <div className='px-4 flex-1 overflow-auto'>
+          {
+             messages && messages?.map((message) => {
+                  return (
+                      <Message key={message._id} message={message} />
+                  )
+              })
+          }
 
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
+      </div>
 
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
 
-        <Message/>
-        <Message/>
-        <Message/>
-
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-
-        <Message/>
-        <Message/>
-        <Message/>
-
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-        <Message/>
-
-        <Message/>
-        <Message/>
-        <Message/>
-
-        <Message/>
-        <Message/>
-        
-    </div>
   )
 }
-
 export default Messages

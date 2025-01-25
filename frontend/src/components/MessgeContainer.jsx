@@ -2,9 +2,10 @@ import React from 'react'
 import MessageSender from './MessageSender'
 import Messages from './Messages'
 import useGetMessages from '../Hooks/useGetMessages'
+
 const MessgeContainer = () => {
 
-    useGetMessages();  
+  useGetMessages();  
   return (
     <div className='md:min-w-[550px] flex flex-col relative'>
             <div className={ 'flex gap-2 items-center bg-zinc-800 text-white px-4 py-2 mb-2'}>
