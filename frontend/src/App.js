@@ -5,7 +5,7 @@ import { LoginPage } from './components/LoginPage';
 
 function App() {
   return (
-    <div className='h-screen flex flex-col justify-center items-center'>
+    <div className='h-screen flex flex-col justify-center items-center '>
        <Routes>
            <Route path = "/" element = {<HomePage/>}/>
            <Route path = "/login" element = {<LoginPage/>}/>
