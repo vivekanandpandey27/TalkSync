@@ -3,7 +3,7 @@ import Message from './Message'
 
 const Messages = () => {
   return (
-    <div className='overflow-y-auto mb-2 overflow-hidden'>
+    <div className='overflow-y-auto mb-2'>
         <Message/>
         <Message/>
 
@@ -25,6 +25,31 @@ const Messages = () => {
 
         <Message/>
         <Message/>
+        <Message/>
+        <Message/>
+        <Message/>
+        <Message/>
+        <Message/>
+
+        <Message/>
+        <Message/>
+        <Message/>
+
+        <Message/>
+        <Message/>
+        <Message/>
+        <Message/>
+        <Message/>
+        <Message/>
+        <Message/>
+
+        <Message/>
+        <Message/>
+        <Message/>
+
+        <Message/>
+        <Message/>
+        
     </div>
   )
 }
