@@ -3,8 +3,15 @@ import { Link,useNavigate  } from 'react-router-dom'
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+
+import { useDispatch } from 'react-redux';
+import { setAuthUser } from '../redux/userSlice';
+
+
 export const LoginPage = () => {
+ 
   const navigate=useNavigate();
+  const dispatch = useDispatch();
   const [FormData,SetformData] = useState({userName : "",password : ""});
     function changeHandler(event)
     {
@@ -28,8 +35,9 @@ export const LoginPage = () => {
           },
           withCredentials:true
         });
-        
+          dispatch(setAuthUser(res.data));
           navigate('/');
+        
           toast.success(res.data.message);
           SetformData({UserName : "",Password : ""});
         
