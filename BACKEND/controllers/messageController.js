@@ -27,7 +27,7 @@ exports.sendMessage= async (req,res)=>{
        }
        await Participants.save();
        return res.status(201).json({
-        message:"message send successfully"
+        newMessage:newmessage,
        })
 
        // socket.io
