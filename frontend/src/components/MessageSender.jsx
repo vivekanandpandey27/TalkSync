@@ -30,6 +30,7 @@ function MessageSender() {
     }
     setMessage("");
   };
+
   return (
     <div className="border-slate-500 p-4 flex flex-row w-full relative bg-zinc-900">
       <form onSubmit={onSubmitHandler} className="flex items-center w-full">

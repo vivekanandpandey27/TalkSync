@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux'
 const Messages = () => {
   useGetMessages();
   const { messages } = useSelector(store => store.message);
-  console.log(messages);
+
+if(!messages) return;
+
   return (
       <div className='px-4 flex-1 overflow-auto'>
           {
