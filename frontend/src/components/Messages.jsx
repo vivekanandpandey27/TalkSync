@@ -9,7 +9,9 @@ const Messages = () => {
 if(!messages) return;
 
   return (
-      <div className='px-4 flex-1 overflow-auto'>
+       
+    
+      <div className='px-4 flex-1  overflow-auto'>
           {
              messages && messages?.map((message) => {
                   return (
