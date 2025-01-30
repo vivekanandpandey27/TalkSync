@@ -17,7 +17,7 @@ const Message = ({message}) => {
     console.log('Message:', message);
     console.log('Sender ID:', message?.senderID);
    console.log('Auth User ID:', authUser?.userId);
-   console.log('Is Auth User:', message?.senderID === authUser?.userId?.toString());
+   console.log('Is Auth User:', message?.senderID === authUser?.id);
 
   }
   print();
@@ -28,7 +28,7 @@ const Message = ({message}) => {
     <div className="w-10 rounded-full">
       <img
         
-        src= {message?.senderID === authUser?.userId ? authUser?.profilePhoto:selectedUser?.profilePhoto } alt="Tailwind CSS chat bubble component"/>
+        src= {message?.senderID === authUser?.id ? authUser?.profilePhoto:selectedUser?.profilePhoto } alt="Tailwind CSS chat bubble component"/>
     </div>
   </div>
   <div className="chat-header">
