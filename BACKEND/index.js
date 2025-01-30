@@ -7,11 +7,12 @@ const userRoutes = require("./routes/userRoutes")
 const messageRoutes=require("./routes/messageRout")
 var cookieParser = require('cookie-parser')
 const cors = require('cors');
+const { app, server } = require("./socket/socket");
 
 dotenv.config();
 
 
-const app = express();
+
 
 const PORT = process.env.PORT || 5000;
 const corsOption={
@@ -29,7 +30,7 @@ app.use("/api/v1/user",userRoutes);
 app.use("/api/v1/message",messageRoutes);
 
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`Server listen at port ${PORT}`);
 })
 
