@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiSearchAlt2 } from "react-icons/bi";
 import MultiUser from './MultiUser';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector,useDispatch } from 'react-redux';
+import { setOtherUsers } from '../redux/userSlice';
 const SideBar = () => {
+    const dispatch=useDispatch();
+    const {otherUsers}=useSelector(store=>store.user)
     const navigate = useNavigate();
+    const [search,setsearch]=useState("")
     const logoutHandler = async()=>{
         try{
             axios.defaults.withCredentials = true;
@@ -21,10 +25,22 @@ const SideBar = () => {
         }
            
     }
+    const searchEngine= async(e)=>{
+        e.preventDefault();
+        const taregtuser=otherUsers?.find((user)=> user.fullName.toLowerCase().includes(search.toLowerCase()));
+        if(taregtuser){
+            dispatch(setOtherUsers([taregtuser]));
+        }else{
+            toast.error("User not found!");
+        }
+    }
     return (
         <div className='border-r border-slate-500 p-4 flex flex-col'>
-            <form  action="" className='flex items-center gap-2'>
+            <form onSubmit={searchEngine} action="" className='flex items-center gap-2'>
                 <input
+                    value={search}
+                    onChange={(e)=>{setsearch(e.target.value)}}
+
                     className='input input-bordered rounded-md' type="text"
                     placeholder='Search...'
                 />

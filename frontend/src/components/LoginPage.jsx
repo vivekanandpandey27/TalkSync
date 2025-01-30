@@ -35,11 +35,12 @@ export const LoginPage = () => {
           },
           withCredentials:true
         });
+        console.log("Login Response :", res.data); 
           dispatch(setAuthUser(res.data));
           navigate('/');
         
           toast.success(res.data.message);
-          SetformData({UserName : "",Password : ""});
+          SetformData({userName : "",password : ""});
         
       }
       catch(error){
@@ -54,7 +55,7 @@ export const LoginPage = () => {
     <div className = 'flex-col justify-center items-center'>
         <div className='text-center text-orange-600 text-2xl mt-2 mb-3 font-bold'>Login</div>
 
-        <form className='flex flex-col relative min-w-[23rem] bg-white/20 rounded-lg backdrop-blur-sm border border-white/5 p-8 shadow-sm shadow-orange-600'>
+        <form  onSubmit={onSubmitHandler}className='flex flex-col relative min-w-[23rem] bg-white/20 rounded-lg backdrop-blur-sm border border-white/5 p-8 shadow-sm shadow-orange-600'>
 
             <label htmlFor= "userName" className='block  text-white text-sm mt-3 font-bold'>
                 UserName
@@ -75,7 +76,7 @@ export const LoginPage = () => {
 
             <Link to= "/signup" className='mt-4 text-center underline text-white/40'> Don't Have a Account ?</Link>
 
-            <button onClick ={onSubmitHandler} type="submit" className="mt-3 w-36 mx-auto bg-gray-400 text-[#080710] py-[0.3rem] rounded-md text-lg font-semibold hover:bg-orange-600 transition-all duration-200">
+            <button type="submit"  className="mt-3 w-36 mx-auto bg-gray-400 text-[#080710] py-[0.3rem] rounded-md text-lg font-semibold hover:bg-orange-600 transition-all duration-200">
                Login
             </button>
             

@@ -9,7 +9,9 @@ const userSlice = createSlice({
     },
     reducers : {
         setAuthUser : (state,action) =>{
-            state.authUser = action.payload;
+        console.log("Dispatching setAuthUser with payload:", action.payload); 
+        state.authUser = action.payload
+        console.log("Updated state.authUser:", state.authUser);
         },
         setOtherUsers : (state,action) => {
             state.otherUsers = action.payload

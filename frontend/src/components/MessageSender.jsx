@@ -10,7 +10,7 @@ function MessageSender() {
   const dispatch = useDispatch();
   const {selectedUser} = useSelector(store=>store.user);
   const {messages} = useSelector(store=>store.message);
-
+  
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -43,7 +43,7 @@ function MessageSender() {
         />
         <RiSendPlane2Fill
           type="submit"
-          className="absolute right-6  scale-120"
+          className="absolute right-7  scale-120"
         />
       </form>
     </div>
