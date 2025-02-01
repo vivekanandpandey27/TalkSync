@@ -34,7 +34,7 @@ const Message = ({message}) => {
   <div className="chat-header">
     <time className="text-xs opacity-50">12:45</time>
   </div>
-  <div className="chat-bubble">{message?.message}</div>
+  <div className={`chat-bubble ${message?.senderID === authUser?.id ? 'chat-end text-white' : 'chat-start text-black bg-slate-50'}`}>{message?.message}</div>
 
 </div>
   )
