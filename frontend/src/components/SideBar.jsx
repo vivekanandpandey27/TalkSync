@@ -5,19 +5,24 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
-import { setOtherUsers } from '../redux/userSlice';
+import { setAuthUser, setOtherUsers } from '../redux/userSlice';
+import { setMessages } from '../redux/messageSlice';
 const SideBar = () => {
     const dispatch=useDispatch();
     const {otherUsers}=useSelector(store=>store.user)
     const navigate = useNavigate();
     const [search,setsearch]=useState("")
+    const REACT_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
     const logoutHandler = async()=>{
         try{
             axios.defaults.withCredentials = true;
-            const res = axios.get("http://localhost:8080/api/v1/user/logout");
+            const res = axios.get(`${REACT_BASE_URL}/api/v1/user/logout`);
             console.log(res);
             navigate("/login");
             toast.success("LogOut Successfully !");
+            dispatch(setAuthUser(null));
+            dispatch(setOtherUsers(null));
+            dispatch(setMessages(null));
         } catch(error) {
             console.log("LogOut Unsuccesfull !");
             console.log(error);
