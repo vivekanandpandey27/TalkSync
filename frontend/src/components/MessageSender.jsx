@@ -10,11 +10,11 @@ function MessageSender() {
   const dispatch = useDispatch();
   const {selectedUser} = useSelector(store=>store.user);
   const {messages} = useSelector(store=>store.message);
-  
+  const REACT_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:8080/api/v1/message/send/${selectedUser?._id}`,
+      const res = await axios.post(`${REACT_BASE_URL}/api/v1/message/send/${selectedUser?._id}`,
                   { message },
                   {
                     headers: {

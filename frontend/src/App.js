@@ -12,15 +12,15 @@ function App() {
   const dispatch = useDispatch();
   const {authUser} =useSelector(store=>store.user);
   const {socket} = useSelector(store=>store.socket);
-  
+  const backend_url = process.env.REACT_APP_BACKEND_BASE_URL;
   useEffect(()=>{
      if(authUser){
-       const socket=io('http://localhost:8080',{
+       const socket=io(`${backend_url}`,{
         query:{
           userId:authUser.id
         }
     });
-    console.log("Auth User ID befire WS : FRONTEND : ", authUser.id);
+    //console.log("Auth User ID befire WS : FRONTEND : ", authUser.id);
        
        dispatch(setSocket(socket));
        

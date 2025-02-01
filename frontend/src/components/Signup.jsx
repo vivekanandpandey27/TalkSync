@@ -7,6 +7,7 @@ export const Signup = () => {
 
  const [FormData,SetformData] = useState({fullName : "",userName : "",password : "",confirmPassword : "",gender:"Male" });
  const navigate=useNavigate();
+ const REACT_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
  function changeHandler(event)
   {
       const {name,type,value,isChecked} = event.target;
@@ -29,7 +30,7 @@ export const Signup = () => {
       gender: normalizedGender,
     };
      try{
-      const res= await axios.post("http://localhost:8080/api/v1/user/register",formDataToSend,{
+      const res= await axios.post(`${REACT_BASE_URL}/api/v1/user/register`,formDataToSend,{
       headers:{
         'Content-Type':'application/json'
       },

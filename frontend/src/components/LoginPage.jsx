@@ -13,6 +13,7 @@ export const LoginPage = () => {
   const navigate=useNavigate();
   const dispatch = useDispatch();
   const [FormData,SetformData] = useState({userName : "",password : ""});
+  const REACT_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
     function changeHandler(event)
     {
         const {name,type,value,isChecked} = event.target;
@@ -29,7 +30,7 @@ export const LoginPage = () => {
       
       event.preventDefault();
       try{
-        const res= await axios.post("http://localhost:8080/api/v1/user/login",FormData,{
+        const res= await axios.post(`${REACT_BASE_URL}/api/v1/user/login`,FormData,{
           headers:{
             'Content-Type':'application/json'
           },

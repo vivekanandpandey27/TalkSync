@@ -16,9 +16,9 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 const corsOption={
-   origin:"http://localhost:3000",
+   origin: ["http://localhost:3000", "http://192.168.46.48:3000"],
    credentials:true
-}
+};
 
 //middleware to parse upcoming request
 app.use(express.json());

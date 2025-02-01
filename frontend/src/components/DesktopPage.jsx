@@ -5,36 +5,20 @@ import useGetMessages from '../Hooks/useGetMessages'
 import { useSelector,useDispatch } from 'react-redux'
 import { setSelectedUser } from '../redux/userSlice'
 import SideBar from './SideBar'
-const MessgeContainer = () => {
+const DesktopPage = () => {
 
     const { authUser,selectedUser } = useSelector(store => store.user);
     const dispatch=useDispatch();
     const {onlineUsers} = useSelector(store => store.user);  
-    const isOnline = onlineUsers?.includes(selectedUser._id);
+    const isOnline = onlineUsers?.includes(selectedUser?._id);
 
    
   useGetMessages();  
   return (
       <>
-       {/* <SideBar /> */}
-       
+       <SideBar />
        {selectedUser!==null?(<div className='md:min-w-[550px] flex flex-col relative'>
-            
             <div className={ 'flex gap-2 items-center bg-zinc-800 text-white px-4 py-2 mb-2'}>
-            <button className="text-primary">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-7 w-7"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-    </svg>
-  </button>
                 <div className={''}>
                     <div className={`w-12 rounded-full avatar ${isOnline ?  'online' : 'offline'}` }>
                         <img src={selectedUser?.profilePhoto} alt="user-profile" />
@@ -66,4 +50,4 @@ const MessgeContainer = () => {
   )
 }
 
-export default MessgeContainer
+export default DesktopPage
