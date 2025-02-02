@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { setAuthUser, setOtherUsers } from '../redux/userSlice';
 import { setMessages } from '../redux/messageSlice';
+import { setSelectedUser } from '../redux/userSlice';
+import { setOnlineUsers } from '../redux/userSlice';
+
 const SideBar = () => {
     const dispatch=useDispatch();
     const {otherUsers}=useSelector(store=>store.user)
@@ -23,6 +26,8 @@ const SideBar = () => {
             dispatch(setAuthUser(null));
             dispatch(setOtherUsers(null));
             dispatch(setMessages(null));
+            dispatch(setSelectedUser(null));
+            dispatch(setOnlineUsers(null));
         } catch(error) {
             console.log("LogOut Unsuccesfull !");
             console.log(error);

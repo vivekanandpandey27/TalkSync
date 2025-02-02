@@ -8,19 +8,33 @@ const Message = ({message}) => {
    
 },[message]);
  
-  function print(){
-    console.log("Auth User from Redux:", authUser);
-    console.log("Auth User from Redux:", authUser);
+  // function print(){
+  //   console.log("Auth User from Redux:", authUser);
+  //   console.log("Auth User from Redux:", authUser);
    
 
-    console.log("selected User from Redux:", selectedUser);
-    console.log('Message:', message);
-    console.log('Sender ID:', message?.senderID);
-   console.log('Auth User ID:', authUser?.userId);
-   console.log('Is Auth User:', message?.senderID === authUser?.id);
+  //   console.log("selected User from Redux:", selectedUser);
+  //   console.log('Message:', message);
+  //   console.log('Sender ID:', message?.senderID);
+  //  console.log('Auth User ID:', authUser?.userId);
+  //  console.log('Is Auth User:', message?.senderID === authUser?.id);
 
-  }
-  print();
+  // }
+  // print();
+
+  const date = new Date(message?.createdAt);
+
+  
+  const options = {
+    timeZone: "Asia/Kolkata", 
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true, 
+  };
+
+
+  const istTime = date.toLocaleTimeString("en-IN", options);
+
   
   return (
     <div ref={scroll} className={`chat ${message?.senderID === authUser?.id ? 'chat-end' : 'chat-start'}`}>
@@ -31,8 +45,8 @@ const Message = ({message}) => {
         src= {message?.senderID === authUser?.id ? authUser?.profilePhoto:selectedUser?.profilePhoto } alt="Tailwind CSS chat bubble component"/>
     </div>
   </div>
-  <div className="chat-header">
-    <time className="text-xs opacity-50">12:45</time>
+  <div className="chat-footer">
+    <time className="text-xs opacity-50">{istTime}</time>
   </div>
   <div className={`chat-bubble ${message?.senderID === authUser?.id ? 'chat-end text-white' : 'chat-start text-black bg-slate-50'}`}>{message?.message}</div>
 

@@ -28,6 +28,9 @@ const DesktopPage = () => {
                     <div className='flex justify-between gap-2 '>
                         <p>{selectedUser?.fullName}</p>
                     </div>
+                    <div className='flex justify-between gap-2 '>
+                        <p>{isOnline ? (<div className='text-green-400'>Online</div>) : (<div>Offline</div>)}</p>
+                    </div>
                 </div>
             </div>
             <Messages />

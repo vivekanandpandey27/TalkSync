@@ -25,8 +25,8 @@ const MessgeContainer = () => {
        {/* <SideBar /> */}
        {/*  */}
        {selectedUser!==null?(
-        <div className=' flex min-w-[400px] h-[830px] sm:min-w-[600px] md:min-w-[700px] flex-col relative'>
-            
+        <div className=' flex  min-w-[400px] h-[830px] sm:min-w-[600px] md:min-w-[700px]  h-full w-full flex-col relative'>
+            {/*  */}
             <div className={ 'flex gap-2  items-center bg-black text-white px-4 py-2 mb-2 fixed w-full z-50'}>
             {/* bg-zinc-800 */}
                 <button className="text-primary">
