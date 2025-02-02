@@ -43,7 +43,7 @@ function App() {
   return (
     <div className='h-screen flex flex-col justify-center items-center '>
        <Routes>
-           <Route path = "/" element = {<HomePage/>}/>
+           <Route path = "/" element = {authUser ?  (<HomePage/>) : (<LoginPage/>)}/>
            <Route path = "/login" element = {<LoginPage/>}/>
            <Route path = "/signup" element = {<Signup/>}/>
        </Routes>

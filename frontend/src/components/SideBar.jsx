@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { setAuthUser, setOtherUsers } from '../redux/userSlice';
 import { setMessages } from '../redux/messageSlice';
+import { setSelectedUser } from '../redux/userSlice';
+import { setOnlineUsers } from '../redux/userSlice';
+
 const SideBar = () => {
     const dispatch=useDispatch();
     const {otherUsers}=useSelector(store=>store.user)
@@ -23,6 +26,8 @@ const SideBar = () => {
             dispatch(setAuthUser(null));
             dispatch(setOtherUsers(null));
             dispatch(setMessages(null));
+            dispatch(setSelectedUser(null));
+            dispatch(setOnlineUsers(null));
         } catch(error) {
             console.log("LogOut Unsuccesfull !");
             console.log(error);
@@ -40,7 +45,7 @@ const SideBar = () => {
         }
     }
     return (
-        <div className='border-r border-slate-500 p-4 flex flex-col'>
+        <div className='border-r border-slate-500 p-4 flex flex-col min-w-[400px]'>
             <form onSubmit={searchEngine} action="" className='flex items-center gap-2'>
                 <input
                     value={search}
